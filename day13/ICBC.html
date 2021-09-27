@@ -1,0 +1,1052 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>银行测试报告</title>
+    <meta name="generator" content="HTMLTestRunner 0.8.2"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    
+<style type="text/css" media="screen">
+body        { font-family: verdana, arial, helvetica, sans-serif; font-size: 80%; }
+table       { font-size: 100%; }
+pre         { }
+
+/* -- heading ---------------------------------------------------------------------- */
+h1 {
+	font-size: 16pt;
+	color: gray;
+}
+.heading {
+    margin-top: 0ex;
+    margin-bottom: 1ex;
+}
+
+.heading .attribute {
+    margin-top: 1ex;
+    margin-bottom: 0;
+}
+
+.heading .description {
+    margin-top: 4ex;
+    margin-bottom: 6ex;
+}
+
+/* -- css div popup ------------------------------------------------------------------------ */
+a.popup_link {
+}
+
+a.popup_link:hover {
+    color: red;
+}
+
+.popup_window {
+    display: none;
+    position: relative;
+    left: 0px;
+    top: 0px;
+    /*border: solid #627173 1px; */
+    padding: 10px;
+    background-color: #E6E6D6;
+    font-family: "Lucida Console", "Courier New", Courier, monospace;
+    text-align: left;
+    font-size: 8pt;
+    width: 500px;
+}
+
+}
+/* -- report ------------------------------------------------------------------------ */
+#show_detail_line {
+    margin-top: 3ex;
+    margin-bottom: 1ex;
+}
+#result_table {
+    width: 80%;
+    border-collapse: collapse;
+    border: 1px solid #777;
+}
+#header_row {
+    font-weight: bold;
+    color: white;
+    background-color: #777;
+}
+#result_table td {
+    border: 1px solid #777;
+    padding: 2px;
+}
+#total_row  { font-weight: bold; }
+.passClass  { background-color: #6c6; }
+.failClass  { background-color: #c60; }
+.errorClass { background-color: #c00; }
+.passCase   { color: #6c6; }
+.failCase   { color: #c60; font-weight: bold; }
+.errorCase  { color: #c00; font-weight: bold; }
+.hiddenRow  { display: none; }
+.testcase   { margin-left: 2em; }
+
+
+/* -- ending ---------------------------------------------------------------------- */
+#ending {
+}
+
+</style>
+
+</head>
+<body>
+<script language="javascript" type="text/javascript"><!--
+output_list = Array();
+
+/* level - 0:Summary; 1:Failed; 2:All */
+function showCase(level) {
+    trs = document.getElementsByTagName("tr");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        id = tr.id;
+        if (id.substr(0,2) == 'ft') {
+            if (level < 1) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+        if (id.substr(0,2) == 'pt') {
+            if (level > 1) {
+                tr.className = '';
+            }
+            else {
+                tr.className = 'hiddenRow';
+            }
+        }
+    }
+}
+
+
+function showClassDetail(cid, count) {
+    var id_list = Array(count);
+    var toHide = 1;
+    for (var i = 0; i < count; i++) {
+        tid0 = 't' + cid.substr(1) + '.' + (i+1);
+        tid = 'f' + tid0;
+        tr = document.getElementById(tid);
+        if (!tr) {
+            tid = 'p' + tid0;
+            tr = document.getElementById(tid);
+        }
+        id_list[i] = tid;
+        if (tr.className) {
+            toHide = 0;
+        }
+    }
+    for (var i = 0; i < count; i++) {
+        tid = id_list[i];
+        if (toHide) {
+            document.getElementById('div_'+tid).style.display = 'none'
+            document.getElementById(tid).className = 'hiddenRow';
+        }
+        else {
+            document.getElementById(tid).className = '';
+        }
+    }
+}
+
+
+function showTestDetail(div_id){
+    var details_div = document.getElementById(div_id)
+    var displayState = details_div.style.display
+    // alert(displayState)
+    if (displayState != 'block' ) {
+        displayState = 'block'
+        details_div.style.display = 'block'
+    }
+    else {
+        details_div.style.display = 'none'
+    }
+}
+
+
+function html_escape(s) {
+    s = s.replace(/&/g,'&amp;');
+    s = s.replace(/</g,'&lt;');
+    s = s.replace(/>/g,'&gt;');
+    return s;
+}
+
+/* obsoleted by detail in <div>
+function showOutput(id, name) {
+    var w = window.open("", //url
+                    name,
+                    "resizable,scrollbars,status,width=800,height=450");
+    d = w.document;
+    d.write("<pre>");
+    d.write(html_escape(output_list[id]));
+    d.write("\n");
+    d.write("<a href='javascript:window.close()'>close</a>\n");
+    d.write("</pre>\n");
+    d.close();
+}
+*/
+--></script>
+
+<div class='heading'>
+<h1>银行测试报告</h1>
+<p class='attribute'><strong>Start Time:</strong> 2021-09-27 22:14:48</p>
+<p class='attribute'><strong>Duration:</strong> 0:00:00.006019</p>
+<p class='attribute'><strong>Status:</strong> Pass 112 Failure 5</p>
+
+<p class='description'>开户、存钱、查询、取款、转账报告</p>
+</div>
+
+
+
+<p id='show_detail_line'>Show
+<a href='javascript:showCase(0)'>Summary</a>
+<a href='javascript:showCase(1)'>Failed</a>
+<a href='javascript:showCase(2)'>All</a>
+</p>
+<table id='result_table'>
+<colgroup>
+<col align='left' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+</colgroup>
+<tr id='header_row'>
+    <td>Test Group/Test case</td>
+    <td>Count</td>
+    <td>Pass</td>
+    <td>Fail</td>
+    <td>Error</td>
+    <td>View</td>
+</tr>
+
+<tr class='passClass'>
+    <td>TestICBC.TestICBC</td>
+    <td>101</td>
+    <td>101</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c1',101)">Detail</a></td>
+</tr>
+
+<tr id='pt1.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_001___阿飞___123456_0___中国____河北省____福禄街____S001___8000_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_002___阿飞1___123457_0___中国____河北省____福禄街____S002___8001_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_003___阿飞2___123458_0___中国____河北省____福禄街____S003___8002_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_004___阿飞3___123459_0___中国____河北省____福禄街____S004___8003_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.5' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_005___阿飞4___123460_0___中国____河北省____福禄街____S005___8004_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.6' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_006___阿飞5___123461_0___中国____河北省____福禄街____S006___8005_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.7' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_007___阿飞6___123462_0___中国____河北省____福禄街____S007___8006_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.8' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_008___阿飞7___123463_0___中国____河北省____福禄街____S008___8007_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.9' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_009___阿飞8___123464_0___中国____河北省____福禄街____S009___8008_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.10' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_010___阿飞9___123465_0___中国____河北省____福禄街____S010___8009_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.11' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_011___阿飞10___123466_0___中国____河北省____福禄街____S011___8010_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.12' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_012___阿飞11___123467_0___中国____河北省____福禄街____S012___8011_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.13' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_013___阿飞12___123468_0___中国____河北省____福禄街____S013___8012_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.14' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_014___阿飞13___123469_0___中国____河北省____福禄街____S014___8013_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.15' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_015___阿飞14___123470_0___中国____河北省____福禄街____S015___8014_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.16' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_016___阿飞15___123471_0___中国____河北省____福禄街____S016___8015_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.17' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_017___阿飞16___123472_0___中国____河北省____福禄街____S017___8016_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.18' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_018___阿飞17___123473_0___中国____河北省____福禄街____S018___8017_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.19' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_019___阿飞18___123474_0___中国____河北省____福禄街____S019___8018_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.20' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_020___阿飞19___123475_0___中国____河北省____福禄街____S020___8019_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.21' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_021___阿飞20___123476_0___中国____河北省____福禄街____S021___8020_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.22' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_022___阿飞21___123477_0___中国____河北省____福禄街____S022___8021_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.23' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_023___阿飞22___123478_0___中国____河北省____福禄街____S023___8022_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.24' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_024___阿飞23___123479_0___中国____河北省____福禄街____S024___8023_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.25' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_025___阿飞24___123480_0___中国____河北省____福禄街____S025___8024_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.26' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_026___阿飞25___123481_0___中国____河北省____福禄街____S026___8025_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.27' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_027___阿飞26___123482_0___中国____河北省____福禄街____S027___8026_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.28' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_028___阿飞27___123483_0___中国____河北省____福禄街____S028___8027_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.29' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_029___阿飞28___123484_0___中国____河北省____福禄街____S029___8028_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.30' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_030___阿飞29___123485_0___中国____河北省____福禄街____S030___8029_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.31' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_031___阿飞30___123486_0___中国____河北省____福禄街____S031___8030_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.32' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_032___阿飞31___123487_0___中国____河北省____福禄街____S032___8031_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.33' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_033___阿飞32___123488_0___中国____河北省____福禄街____S033___8032_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.34' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_034___阿飞33___123489_0___中国____河北省____福禄街____S034___8033_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.35' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_035___阿飞34___123490_0___中国____河北省____福禄街____S035___8034_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.36' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_036___阿飞35___123491_0___中国____河北省____福禄街____S036___8035_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.37' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_037___阿飞36___123492_0___中国____河北省____福禄街____S037___8036_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.38' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_038___阿飞37___123493_0___中国____河北省____福禄街____S038___8037_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.39' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_039___阿飞38___123494_0___中国____河北省____福禄街____S039___8038_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.40' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_040___阿飞39___123495_0___中国____河北省____福禄街____S040___8039_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.41' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_041___阿飞40___123496_0___中国____河北省____福禄街____S041___8040_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.42' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_042___阿飞41___123497_0___中国____河北省____福禄街____S042___8041_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.43' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_043___阿飞42___123498_0___中国____河北省____福禄街____S043___8042_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.44' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_044___阿飞43___123499_0___中国____河北省____福禄街____S044___8043_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.45' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_045___阿飞44___123500_0___中国____河北省____福禄街____S045___8044_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.46' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_046___阿飞45___123501_0___中国____河北省____福禄街____S046___8045_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.47' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_047___阿飞46___123502_0___中国____河北省____福禄街____S047___8046_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.48' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_048___阿飞47___123503_0___中国____河北省____福禄街____S048___8047_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.49' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_049___阿飞48___123504_0___中国____河北省____福禄街____S049___8048_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.50' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_050___阿飞49___123505_0___中国____河北省____福禄街____S050___8049_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.51' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_051___阿飞50___123506_0___中国____河北省____福禄街____S051___8050_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.52' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_052___阿飞51___123507_0___中国____河北省____福禄街____S052___8051_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.53' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_053___阿飞52___123508_0___中国____河北省____福禄街____S053___8052_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.54' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_054___阿飞53___123509_0___中国____河北省____福禄街____S054___8053_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.55' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_055___阿飞54___123510_0___中国____河北省____福禄街____S055___8054_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.56' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_056___阿飞55___123511_0___中国____河北省____福禄街____S056___8055_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.57' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_057___阿飞56___123512_0___中国____河北省____福禄街____S057___8056_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.58' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_058___阿飞57___123513_0___中国____河北省____福禄街____S058___8057_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.59' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_059___阿飞58___123514_0___中国____河北省____福禄街____S059___8058_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.60' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_060___阿飞59___123515_0___中国____河北省____福禄街____S060___8059_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.61' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_061___阿飞60___123516_0___中国____河北省____福禄街____S061___8060_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.62' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_062___阿飞61___123517_0___中国____河北省____福禄街____S062___8061_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.63' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_063___阿飞62___123518_0___中国____河北省____福禄街____S063___8062_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.64' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_064___阿飞63___123519_0___中国____河北省____福禄街____S064___8063_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.65' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_065___阿飞64___123520_0___中国____河北省____福禄街____S065___8064_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.66' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_066___阿飞65___123521_0___中国____河北省____福禄街____S066___8065_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.67' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_067___阿飞66___123522_0___中国____河北省____福禄街____S067___8066_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.68' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_068___阿飞67___123523_0___中国____河北省____福禄街____S068___8067_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.69' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_069___阿飞68___123524_0___中国____河北省____福禄街____S069___8068_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.70' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_070___阿飞69___123525_0___中国____河北省____福禄街____S070___8069_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.71' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_071___阿飞70___123526_0___中国____河北省____福禄街____S071___8070_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.72' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_072___阿飞71___123527_0___中国____河北省____福禄街____S072___8071_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.73' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_073___阿飞72___123528_0___中国____河北省____福禄街____S073___8072_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.74' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_074___阿飞73___123529_0___中国____河北省____福禄街____S074___8073_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.75' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_075___阿飞74___123530_0___中国____河北省____福禄街____S075___8074_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.76' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_076___阿飞75___123531_0___中国____河北省____福禄街____S076___8075_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.77' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_077___阿飞76___123532_0___中国____河北省____福禄街____S077___8076_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.78' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_078___阿飞77___123533_0___中国____河北省____福禄街____S078___8077_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.79' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_079___阿飞78___123534_0___中国____河北省____福禄街____S079___8078_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.80' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_080___阿飞79___123535_0___中国____河北省____福禄街____S080___8079_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.81' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_081___阿飞80___123536_0___中国____河北省____福禄街____S081___8080_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.82' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_082___阿飞81___123537_0___中国____河北省____福禄街____S082___8081_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.83' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_083___阿飞82___123538_0___中国____河北省____福禄街____S083___8082_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.84' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_084___阿飞83___123539_0___中国____河北省____福禄街____S084___8083_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.85' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_085___阿飞84___123540_0___中国____河北省____福禄街____S085___8084_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.86' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_086___阿飞85___123541_0___中国____河北省____福禄街____S086___8085_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.87' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_087___阿飞86___123542_0___中国____河北省____福禄街____S087___8086_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.88' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_088___阿飞87___123543_0___中国____河北省____福禄街____S088___8087_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.89' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_089___阿飞88___123544_0___中国____河北省____福禄街____S089___8088_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.90' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_090___阿飞89___123545_0___中国____河北省____福禄街____S090___8089_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.91' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_091___阿飞90___123546_0___中国____河北省____福禄街____S091___8090_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.92' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_092___阿飞91___123547_0___中国____河北省____福禄街____S092___8091_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.93' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_093___阿飞92___123548_0___中国____河北省____福禄街____S093___8092_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.94' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_094___阿飞93___123549_0___中国____河北省____福禄街____S094___8093_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.95' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_095___阿飞94___123550_0___中国____河北省____福禄街____S095___8094_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.96' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_096___阿飞95___123551_0___中国____河北省____福禄街____S096___8095_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.97' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_097___阿飞96___123552_0___中国____河北省____福禄街____S097___8096_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.98' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_098___阿飞97___123553_0___中国____河北省____福禄街____S098___8097_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.99' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_099___阿飞98___123554_0___中国____河北省____福禄街____S099___8098_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.100' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_100___阿飞99___123555_0___中国____河北省____福禄街____S100___8099_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.101' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser_101___阿飞100___123556_0___中国____河北省____福禄街____S101___8100_0__3_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr class='failClass'>
+    <td>TestICBC.TestICBC1</td>
+    <td>5</td>
+    <td>2</td>
+    <td>3</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c2',5)">Detail</a></td>
+</tr>
+
+<tr id='ft2.1' class='none'>
+    <td class='failCase'><div class='testcase'>testAddUser1_1__15423648_0__0_0__1_</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft2.1')" >
+        fail</a>
+
+    <div id='div_ft2.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft2.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft2.1: Traceback (most recent call last):
+  File "D:\pyproject\venv\lib\site-packages\ddt.py", line 182, in wrapper
+    return func(self, *args, **kwargs)
+  File "D:\pythonProject\day13\TestICBC.py", line 71, in testAddUser1
+    self.assertEqual(s, c)
+AssertionError: False != 1
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt2.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser1_2__78954612_0___1_0__0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='ft2.3' class='none'>
+    <td class='failCase'><div class='testcase'>testAddUser1_3__19753468_0__50_0__1_</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft2.3')" >
+        fail</a>
+
+    <div id='div_ft2.3' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft2.3').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft2.3: Traceback (most recent call last):
+  File "D:\pyproject\venv\lib\site-packages\ddt.py", line 182, in wrapper
+    return func(self, *args, **kwargs)
+  File "D:\pythonProject\day13\TestICBC.py", line 71, in testAddUser1
+    self.assertEqual(s, c)
+AssertionError: False != 1
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft2.4' class='none'>
+    <td class='failCase'><div class='testcase'>testAddUser1_4__15476824_0__100_0__1_</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft2.4')" >
+        fail</a>
+
+    <div id='div_ft2.4' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft2.4').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft2.4: Traceback (most recent call last):
+  File "D:\pyproject\venv\lib\site-packages\ddt.py", line 182, in wrapper
+    return func(self, *args, **kwargs)
+  File "D:\pythonProject\day13\TestICBC.py", line 71, in testAddUser1
+    self.assertEqual(s, c)
+AssertionError: False != 1
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt2.5' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser1_5__19546328_0___1000_0__0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr class='passClass'>
+    <td>TestICBC.TestICBC2</td>
+    <td>3</td>
+    <td>3</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c3',3)">Detail</a></td>
+</tr>
+
+<tr id='pt3.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser2_1__15468249_0__123456_0__1_0_</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.1')" >
+        pass</a>
+
+    <div id='div_pt3.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.1: 该用户不存在！
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt3.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser2_2__12654875_0__123457_0__1_0_</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.2')" >
+        pass</a>
+
+    <div id='div_pt3.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.2: 该用户不存在！
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt3.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser2_3__16478524_0__123458_0__1_0_</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt3.3')" >
+        pass</a>
+
+    <div id='div_pt3.3' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt3.3').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt3.3: 该用户不存在！
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='passClass'>
+    <td>TestICBC.TestICBC3</td>
+    <td>4</td>
+    <td>4</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c4',4)">Detail</a></td>
+</tr>
+
+<tr id='pt4.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser3_1__54497564_0__123456_0__8000_0__0_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt4.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser3_2__85274136_0__123456_0__2000_0__0_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt4.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser3_3__96385214_0__123456_0__3000_0__0_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt4.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser3_4__78945612_0__123456_0__1000_0__0_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr class='failClass'>
+    <td>TestICBC.TestICBC4</td>
+    <td>4</td>
+    <td>2</td>
+    <td>2</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c5',4)">Detail</a></td>
+</tr>
+
+<tr id='pt5.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser4_1__46578945_0__75149461_0__123456_0__200_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt5.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testAddUser4_2__46578946_0__75149462_0__123457_0__201_0__1_0_</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='ft5.3' class='none'>
+    <td class='failCase'><div class='testcase'>testAddUser4_3__46578947_0__75149463_0__123458_0__202_0__0_0_</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft5.3')" >
+        fail</a>
+
+    <div id='div_ft5.3' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft5.3').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft5.3: Traceback (most recent call last):
+  File "D:\pyproject\venv\lib\site-packages\ddt.py", line 182, in wrapper
+    return func(self, *args, **kwargs)
+  File "D:\pythonProject\day13\TestICBC.py", line 110, in testAddUser4
+    self.assertEqual(s, e)
+AssertionError: 1 != 0.0
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft5.4' class='none'>
+    <td class='failCase'><div class='testcase'>testAddUser4_4__46578948_0__75149464_0__123459_0__203_0__0_0_</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft5.4')" >
+        fail</a>
+
+    <div id='div_ft5.4' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft5.4').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft5.4: Traceback (most recent call last):
+  File "D:\pyproject\venv\lib\site-packages\ddt.py", line 182, in wrapper
+    return func(self, *args, **kwargs)
+  File "D:\pythonProject\day13\TestICBC.py", line 110, in testAddUser4
+    self.assertEqual(s, e)
+AssertionError: 1 != 0.0
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='total_row'>
+    <td>Total</td>
+    <td>117</td>
+    <td>112</td>
+    <td>5</td>
+    <td>0</td>
+    <td>&nbsp;</td>
+</tr>
+</table>
+
+<div id='ending'>&nbsp;</div>
+
+</body>
+</html>
